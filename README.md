@@ -1,7 +1,7 @@
 # Video-Swin-Transformer-Pytorch
 This repo is a simple usage of the official implementation ["Video Swin Transformer"](https://github.com/SwinTransformer/Video-Swin-Transformer).
 
-![teaser](figures/teaser.png)
+![teaser](https://github.com/SwinTransformer/Video-Swin-Transformer/blob/master/figures/teaser.png)
 
 ## Introduction
 
