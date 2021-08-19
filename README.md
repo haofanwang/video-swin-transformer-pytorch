@@ -35,3 +35,23 @@ python example.py
 
 ## Acknowledgement
 The code is adapted from the official [Video-Swin-Transformer](https://github.com/SwinTransformer/Video-Swin-Transformer) repository. This project is inspired by [swin-transformer-pytorch](https://github.com/berniwal/swin-transformer-pytorch), which provides the simplest code to get started.
+
+
+## Citation
+If you find our work useful in your research, please cite:
+
+```
+@article{liu2021video,
+  title={Video Swin Transformer},
+  author={Liu, Ze and Ning, Jia and Cao, Yue and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Hu, Han},
+  journal={arXiv preprint arXiv:2106.13230},
+  year={2021}
+}
+
+@article{liu2021Swin,
+  title={Swin Transformer: Hierarchical Vision Transformer using Shifted Windows},
+  author={Liu, Ze and Lin, Yutong and Cao, Yue and Hu, Han and Wei, Yixuan and Zhang, Zheng and Lin, Stephen and Guo, Baining},
+  journal={arXiv preprint arXiv:2103.14030},
+  year={2021}
+}
+```
