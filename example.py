@@ -15,17 +15,21 @@ print(logits.shape)
 
 '''
 load the pretrained weight
+
+1. git clone https://github.com/SwinTransformer/Video-Swin-Transformer.git
+2. move all files into ./Video-Swin-Transformer
+
 '''
-from mmcv import Config, DictAction
-from mmaction.models import build_model
-from mmcv.runner import get_dist_info, init_dist, load_checkpoint
+# from mmcv import Config, DictAction
+# from mmaction.models import build_model
+# from mmcv.runner import get_dist_info, init_dist, load_checkpoint
 
-config = './configs/recognition/swin/swin_base_patch244_window1677_sthv2.py'
-checkpoint = './checkpoints/swin_base_patch244_window1677_sthv2.pth'
+# config = './configs/recognition/swin/swin_base_patch244_window1677_sthv2.py'
+# checkpoint = './checkpoints/swin_base_patch244_window1677_sthv2.pth'
 
-cfg = Config.fromfile(config)
-model = build_model(cfg.model, train_cfg=None, test_cfg=cfg.get('test_cfg'))
-load_checkpoint(model, checkpoint, map_location='cpu')
+# cfg = Config.fromfile(config)
+# model = build_model(cfg.model, train_cfg=None, test_cfg=cfg.get('test_cfg'))
+# load_checkpoint(model, checkpoint, map_location='cpu')
 
 '''
 use the pretrained SwinTransformer3D as feature extractor
