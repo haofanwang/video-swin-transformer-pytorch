@@ -30,6 +30,19 @@ If you want to try different models, please refer to [Video-Swin-Transformer](ht
 
 ### Inference
 ```
+import torch
+import torch.nn as nn
+from video_swin_transformer import SwinTransformer3D
+
+model = SwinTransformer3D()
+print(model)
+
+dummy_x = torch.rand(1, 3, 32, 224, 224)
+logits = model(dummy_x)
+print(logits.shape)
+```
+or
+```
 python example.py
 ```
 
