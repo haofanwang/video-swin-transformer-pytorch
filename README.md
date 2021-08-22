@@ -13,7 +13,7 @@ This repo is a simple usage of the official implementation ["Video Swin Transfor
 ```
 pip install -r requirements.txt
 ```
-If this does not work, please refer to the official [install.md](docs/install.md) for installation.
+If this does not work, please refer to the official [install.md](https://github.com/SwinTransformer/Video-Swin-Transformer/blob/master/docs/install.md) for installation.
 
 
 ### Prepare
