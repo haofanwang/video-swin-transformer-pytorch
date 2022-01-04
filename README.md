@@ -11,22 +11,18 @@ This repo is a simple usage of the official implementation ["Video Swin Transfor
 
 ###  Installation
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
-If this does not work, please refer to the official [install.md](https://github.com/SwinTransformer/Video-Swin-Transformer/blob/master/docs/install.md) for installation.
-
 
 ### Prepare
 ```
-git clone https://github.com/haofanwang/video-swin-transformer-pytorch.git
+$ git clone https://github.com/haofanwang/video-swin-transformer-pytorch.git
+$ cd video-swin-transformer-pytorch
+$ mkdir checkpoints && cd checkpoints
+$ wget https://github.com/SwinTransformer/storage/releases/download/v1.0.4/swin_base_patch244_window1677_sthv2.pth
+$ cd ..
 ```
-```
-cd video-swin-transformer-pytorch
-mkdir checkpoints && cd checkpoints
-wget https://github.com/SwinTransformer/storage/releases/download/v1.0.4/swin_base_patch244_window1677_sthv2.pth
-cd ..
-```
-If you want to try different models, please refer to [Video-Swin-Transformer](https://github.com/SwinTransformer/Video-Swin-Transformer) and download corresponding pretrained weight, then modify the config and pretrained weight.
+Please refer to [Video-Swin-Transformer](https://github.com/SwinTransformer/Video-Swin-Transformer) and download other checkpoints.
 
 ### Inference
 ```
@@ -42,8 +38,49 @@ logits = model(dummy_x)
 print(logits.shape)
 ```
 
-If you want to use the pre-trained model provided in the official repository, please follow the [INSTALL](https://github.com/SwinTransformer/Video-Swin-Transformer/blob/master/docs/install.md).
+If you want to utilize the pre-trained checkpoints without diving into the codebase of open-mmlab, you can also do it as below.
 
+```
+import torch
+import torch.nn as nn
+from collections import OrderedDict
+from video_swin_transformer import SwinTransformer3D
+
+model = SwinTransformer3D(embed_dim=128, 
+                          depths=[2, 2, 18, 2], 
+                          num_heads=[4, 8, 16, 32], 
+                          patch_size=(2,4,4), 
+                          window_size=(16,7,7), 
+                          drop_path_rate=0.4, 
+                          patch_norm=True)
+
+# https://github.com/SwinTransformer/Video-Swin-Transformer/blob/master/configs/recognition/swin/swin_base_patch244_window1677_sthv2.py
+checkpoint = torch.load('./checkpoints/swin_base_patch244_window1677_sthv2.pth')
+
+new_state_dict = OrderedDict()
+for k, v in checkpoint['state_dict'].items():
+    if 'backbone' in k:
+        name = k[9:]
+        new_state_dict[name] = v 
+
+model.load_state_dict(new_state_dict) 
+
+dummy_x = torch.rand(1, 3, 32, 224, 224)
+logits = model(dummy_x)
+print(logits.shape)
+```
+
+Warning: this is an informal implementation, and there may be errors that are difficult to find. Therefore, I strongly recommend that you use the official code base to load the weights.
+
+### Inference as official
+
+```
+$ git clone https://github.com/SwinTransformer/Video-Swin-Transformer.git
+$ cp *.py Video-Swin-Transformer
+$ cd Video-Swin-Transformer
+```
+
+Then, you can load the pre-trained checkpoint.
 ```
 from mmcv import Config, DictAction
 from mmaction.models import build_model
